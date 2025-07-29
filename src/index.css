@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+
+.container{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+body{
+    font-family: 'Roboto';
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.4s ease-out;
+}
+
+
+button, a{
+    cursor: pointer;
+}
