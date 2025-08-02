@@ -102,14 +102,14 @@ const Header = () => {
                   className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full"
                 >
                   <img src={uzb} className="w-[20px] h-[20px]" alt="Uzbek" />
-                  O'zbek tili
+                  O'zbek 
                 </button>
                 <button
                   onClick={() => handleLanguageChange("ru")}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full"
                 >
                   <img src={ru} className="w-[20px] h-[20px]" alt="Russian" />
-                  Русский язык
+                  Русский 
                 </button>
               </div>
             )}
@@ -157,7 +157,7 @@ const Header = () => {
                 </button>
               ) : (
                 <div
-                  onClick={() => navigate("/profile")} // ✅ shu yerda to'g'rilandi
+                  onClick={() => navigate("/profile")}
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <img
@@ -165,7 +165,7 @@ const Header = () => {
                     alt="user"
                     className="w-[36px] h-[36px] rounded-full border border-green-600 object-cover"
                   />
-                  <span className="text-black sm:text-[#007C5B] font-semibold text-[16px]">
+                  <span className="text-white sm:text-black sm:text-[#007C5B] font-semibold text-[16px]">
                     {user.name}
                   </span>
                 </div>

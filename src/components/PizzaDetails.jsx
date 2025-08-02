@@ -3,11 +3,20 @@ import { useEffect, useState } from "react";
 import { fetchMealDetails } from "../data/api";
 import { useCart } from "../contexts/CartContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 // Lucide iconlar
-import { ArrowLeft, ShoppingCart, Undo2, CircleDollarSign, MapPin, Tag } from "lucide-react";
+import {
+  ArrowLeft,
+  ShoppingCart,
+  Undo2,
+  CircleDollarSign,
+  MapPin,
+  Tag,
+} from "lucide-react";
 
 export default function ProductDetails() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [meal, setMeal] = useState(null);
@@ -23,12 +32,12 @@ export default function ProductDetails() {
 
   const handleAddToCart = () => {
     addToCart(meal);
-    toast.success(`${meal.strMeal}: qo‘shildi ✅`);
+    toast.success(t("addedToCart", { meal: meal.strMeal }));
     setShowCart(true);
     navigate("/");
   };
 
-  const price = Math.floor(25000 + Math.random() * 35000); // Dinamik narx
+  const price = Math.floor(25000 + Math.random() * 35000);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -36,11 +45,11 @@ export default function ProductDetails() {
         onClick={() => navigate(-1)}
         className="mb-6 inline-flex items-center gap-2 text-red-600 hover:text-red-700 hover:underline transition text-sm"
       >
-        <ArrowLeft size={18} /> Orqaga qaytish
+        <ArrowLeft size={18} /> {t("back")}
       </button>
 
       <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 flex flex-col md:flex-row gap-8">
-        {/* Left - Image */}
+        {/* Chap - Rasm */}
         <div className="w-full md:w-[400px]">
           <img
             src={meal.strMealThumb}
@@ -53,25 +62,26 @@ export default function ProductDetails() {
             <div className="flex items-center gap-2">
               <Tag size={16} className="text-green-600" />
               <span>
-                <strong>Kategoriya:</strong> {meal.strCategory}
+                <strong>{t("category")}:</strong> {meal.strCategory}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin size={16} className="text-green-600" />
               <span>
-                <strong>Kelib chiqishi:</strong> {meal.strArea}
+                <strong>{t("origin")}:</strong> {meal.strArea}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <CircleDollarSign size={16} className="text-green-600" />
               <span>
-                <strong>Narxi:</strong> {price.toLocaleString()} so‘m
+                <strong>{t("price")}:</strong>{" "}
+                {price.toLocaleString()} so‘m
               </span>
             </div>
           </div>
         </div>
 
-        {/* Right - Info */}
+        {/* O‘ng - Info */}
         <div className="flex-1">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
             {meal.strMeal}
@@ -94,11 +104,13 @@ export default function ProductDetails() {
           </div>
 
           <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
-            {meal.strInstructions?.slice(0, 500)}...
+            {meal.strInstructions
+              ? meal.strInstructions.slice(0, 500) + "..."
+              : t("noInstructions")}
           </p>
 
           <h3 className="font-semibold text-lg mb-2 text-gray-800">
-            🧂 Tarkibi:
+            🧂 {t("ingredients")}:
           </h3>
           <ul className="list-disc pl-5 space-y-1 text-gray-700 text-sm">
             {Array.from({ length: 20 }).map((_, i) => {
@@ -117,14 +129,14 @@ export default function ProductDetails() {
               onClick={handleAddToCart}
               className="flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-full shadow hover:bg-green-700 transition text-sm md:text-base font-semibold"
             >
-              <ShoppingCart size={18} /> Savatchaga qo‘shish
+              <ShoppingCart size={18} /> {t("addToCart")}
             </button>
 
             <button
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 border border-gray-300 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-100 transition text-sm md:text-base font-semibold"
             >
-              <Undo2 size={18} /> Orqaga
+              <Undo2 size={18} /> {t("back")}
             </button>
           </div>
         </div>

@@ -1,24 +1,21 @@
-// src/pages/Profile.jsx
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
+  const { t } = useTranslation(); // 👈 i18n qo‘shildi
 
-useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) {
-    const parsedUser = JSON.parse(storedUser);
-    console.log("User data:", parsedUser); // 👈 shu yerda tekshir
-    setUser(parsedUser);
-  } else {
-    navigate("/login");
-  }
-}, [navigate]);
-
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -33,10 +30,9 @@ useEffect(() => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <h1 className="text-3xl font-bold text-green-700 mb-6">Profil</h1>
+      <h1 className="text-3xl font-bold text-green-700 mb-6">{t("profile")}</h1>
 
       <div className="flex flex-col md:flex-row gap-6">
-        {/* Chap panel */}
         <div className="md:w-1/3 w-full bg-white p-6 rounded-xl shadow-md border border-gray-200">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-[50px] h-[50px] rounded-full bg-green-100 text-green-800 flex items-center justify-center text-xl font-semibold">
@@ -57,7 +53,7 @@ useEffect(() => {
                   : "bg-gray-100 hover:bg-gray-200"
               }`}
             >
-              Shaxsiy ma'lumotlar
+              {t("personalInfo")}
             </button>
             <button
               onClick={() => setActiveSection("address")}
@@ -67,7 +63,7 @@ useEffect(() => {
                   : "bg-gray-100 hover:bg-gray-200"
               }`}
             >
-              Mening manzilim
+              {t("myAddress")}
             </button>
             <button
               onClick={() => setActiveSection("orders")}
@@ -77,30 +73,29 @@ useEffect(() => {
                   : "bg-gray-100 hover:bg-gray-200"
               }`}
             >
-              Mening buyurtmalarim
+              {t("myOrders")}
             </button>
             <button
               onClick={handleLogout}
               className="w-full text-left bg-red-100 py-3 px-4 rounded-lg text-sm font-medium text-red-600 hover:bg-red-200"
             >
-              Chiqish
+              {t("logout")}
             </button>
           </div>
         </div>
 
-        {/* O‘ng panel - kontent */}
         <div className="md:w-2/3 w-full bg-white p-6 rounded-xl shadow-md border border-gray-200">
           {activeSection === "info" && (
             <div>
               <h2 className="text-xl font-semibold text-green-700 mb-4">
-                Shaxsiy ma'lumotlar
+                {t("personalInfo")}
               </h2>
               <div className="space-y-4">
                 <p>
-                  <span className="font-medium">Ism:</span> {userName}
+                  <span className="font-medium">{t("name")}:</span> {userName}
                 </p>
                 <p>
-                  <span className="font-medium">Telefon:</span> {userPhone}
+                  <span className="font-medium">{t("phone")}:</span> {userPhone}
                 </p>
               </div>
             </div>
@@ -109,22 +104,18 @@ useEffect(() => {
           {activeSection === "address" && (
             <div>
               <h2 className="text-xl font-semibold text-green-700 mb-4">
-                Mening manzilim
+                {t("myAddress")}
               </h2>
-              <p className="text-sm text-gray-500 italic">
-                Hozircha manzil ma'lumotlari mavjud emas.
-              </p>
+              <p className="text-sm text-gray-500 italic">{t("noAddress")}</p>
             </div>
           )}
 
           {activeSection === "orders" && (
             <div>
               <h2 className="text-xl font-semibold text-green-700 mb-4">
-                Buyurtmalar tarixi
+                {t("myOrders")}
               </h2>
-              <p className="text-sm text-gray-500 italic">
-                Siz hali hech qanday buyurtma bermagansiz.
-              </p>
+              <p className="text-sm text-gray-500 italic">{t("noOrders")}</p>
             </div>
           )}
         </div>

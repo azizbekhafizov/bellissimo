@@ -8,9 +8,9 @@ import {
   fetchMealDetails,
 } from "../data/api";
 import { useCart } from "../contexts/CartContext";
-import { Menu, ShoppingCart } from "lucide-react";
-import MobileMenu from "./MobileMenu";
+import { ShoppingCart } from "lucide-react";
 import { RiMenu2Fill } from "react-icons/ri";
+import MobileMenu from "./MobileMenu";
 
 const ProductSection = () => {
   const [mode, setMode] = useState("delivery");
@@ -19,12 +19,21 @@ const ProductSection = () => {
   const [loading, setLoading] = useState(true);
   const { cartCount, toast } = useCart();
   const navigate = useNavigate();
-
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
+
+      // ⬇️ LocalStorage'dan mavjud ovqatlar
+      const storedMeals = JSON.parse(localStorage.getItem("mealsData")) || {};
+      const storedCats = Object.keys(storedMeals);
+      if (storedCats.length > 0) {
+        setCategories(storedCats);
+        setMealsByCategory(storedMeals);
+      }
+
+      // ⬇️ Yangilab olish
       const cats = await fetchAllMealCategories();
       const validCats = [];
       const mealsData = {};
@@ -48,6 +57,7 @@ const ProductSection = () => {
         }
       }
 
+      localStorage.setItem("mealsData", JSON.stringify(mealsData));
       setCategories(validCats);
       setMealsByCategory(mealsData);
       setLoading(false);
@@ -56,7 +66,6 @@ const ProductSection = () => {
     load();
   }, []);
 
-  // 👉 Window width 640 dan katta bo'lsa menyuni avtomatik yopish
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 640) {
@@ -152,45 +161,67 @@ const ProductSection = () => {
         </div>
       </div>
 
-      {categories.map((cat) => (
-        <section key={cat} id={cat} className="mb-16 scroll-mt-24">
-          <h2 className="text-2xl font-bold mb-6">{cat}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-            {(mealsByCategory[cat] || []).map((meal) => (
-              <div
-                key={meal.idMeal}
-                onClick={() => navigate(`/product/${meal.idMeal}`)}
-                className="w-full max-w-[285px] mx-auto h-[380px] cursor-pointer bg-white rounded-3xl shadow hover:shadow-xl transition-all flex flex-col items-center"
-              >
-                <img
-                  src={meal.strMealThumb}
-                  alt={meal.strMeal}
-                  className="w-full h-[190px] rounded-t-3xl object-cover"
-                />
-                <h3 className="text-lg font-bold mt-4 text-center px-2">
-                  {meal.strMeal.length > 20
-                    ? meal.strMeal.slice(0, 16) + "..."
-                    : meal.strMeal}
-                </h3>
-                <p className="text-sm text-gray-500 mt-1 text-center px-3 line-clamp-3">
-                  {meal.strInstructions
-                    ? meal.strInstructions.slice(0, 100) + "..."
-                    : "Tavsif mavjud emas."}
-                </p>
-                <div className="mt-4 text-[15px] font-semibold bg-gray-100 px-5 py-2 rounded-full">
-                  {meal.price
-                    ? `${meal.price}`
-                    : `${(
-                        Math.floor(Math.random() * 40000) + 60000
-                      ).toLocaleString("uz-UZ")} so‘mdan`}
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mt-6">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <div
+              key={i}
+              className="w-full max-w-[285px] h-[380px] mx-auto bg-white rounded-3xl p-4 shadow"
+            >
+              <div className="flex flex-col animate-pulse h-full">
+                <div className="w-full h-[190px] bg-gray-200 rounded-2xl mb-4"></div>
+                <div className="flex-1 space-y-3 px-2">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+                  <div className="h-3 bg-gray-200 rounded w-full"></div>
+                  <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div className="mt-auto px-2 pt-4">
+                  <div className="h-6 bg-gray-200 rounded-full w-[140px] mx-auto"></div>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-      ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        categories.map((cat) => (
+          <section key={cat} id={cat} className="mb-16 scroll-mt-24">
+            <h2 className="text-2xl font-bold mb-6">{cat}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+              {(mealsByCategory[cat] || []).map((meal) => (
+                <div
+                  key={meal.idMeal}
+                  onClick={() => navigate(`/product/${meal.idMeal}`)}
+                  className="w-full  max-w-[285px] mx-auto h-[380px] cursor-pointer bg-white rounded-3xl shadow hover:shadow-xl transition-all flex flex-col items-center"
+                >
+                  <img
+                    src={meal.strMealThumb}
+                    alt={meal.strMeal}
+                    className="w-full h-[190px] rounded-t-3xl object-cover"
+                  />
+                  <h3 className="text-lg font-bold mt-4 text-center px-2">
+                    {meal.strMeal.length > 20
+                      ? meal.strMeal.slice(0, 16) + "..."
+                      : meal.strMeal}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1 text-center px-3 line-clamp-3">
+                    {meal.strInstructions
+                      ? meal.strInstructions.slice(0, 100) + "..."
+                      : "Tavsif mavjud emas."}
+                  </p>
+                  <div className="mt-4 text-[15px] font-semibold bg-gray-100 px-5 py-2 rounded-full">
+                    {meal.price
+                      ? `${meal.price}`
+                      : `${(
+                          Math.floor(Math.random() * 40000) + 60000
+                        ).toLocaleString("uz-UZ")} so‘mdan`}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      )}
 
-      {/* Toast */}
       {toast && (
         <div className="fixed top-6 right-6 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg z-50 animate-slide-in">
           {toast}

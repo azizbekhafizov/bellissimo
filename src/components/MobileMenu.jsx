@@ -144,7 +144,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   : "text-gray-500"
               }`}
             >
-              O‘zbek tili
+              O‘zbek 
             </button>
             <button
               onClick={() => handleLangChange("ru")}
@@ -154,7 +154,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   : "text-gray-500"
               }`}
             >
-              Русский язык
+              Русский 
             </button>
           </div>
         </div>
