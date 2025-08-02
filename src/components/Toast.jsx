@@ -1,4 +1,3 @@
-// components/Toast.jsx
 export default function Toast({ message }) {
   if (!message) return null;
 

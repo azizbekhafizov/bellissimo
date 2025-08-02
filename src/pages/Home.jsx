@@ -9,11 +9,7 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-
-      {/* Mahsulotlar qismi: modalni ochish uchun handler yuboramiz */}
       <ProductSection onProductClick={setSelectedProductId} />
-
-      {/* Modal: mahsulotga bosilganda ochiladi */}
       <ProductDetailsModal
         id={selectedProductId}
         onClose={() => setSelectedProductId(null)}

@@ -23,7 +23,6 @@ const LanguageSwitcher = () => {
 
   return (
     <div className="relative">
-      {/* Language trigger */}
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center text-[18px] font-normal gap-1.5"
@@ -37,7 +36,6 @@ const LanguageSwitcher = () => {
         <ChevronDown size={14} />
       </button>
 
-      {/* Dropdown */}
       {open && (
         <div className="absolute top-[110%] right-0 bg-white shadow-lg border rounded-md z-50">
           <div
@@ -55,7 +53,6 @@ const LanguageSwitcher = () => {
         </div>
       )}
 
-      {/* Loading modal */}
       {loading && (
         <div className="fixed inset-0 bg-black/40 z-[9999] flex items-center justify-center">
           <div className="bg-white text-black p-6 rounded-lg text-2xl font-bold shadow-lg">

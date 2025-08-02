@@ -107,14 +107,11 @@ const MobileMenu = ({ isOpen, onClose }) => {
               )}
             </AnimatePresence>
           </div>
-
-          {/* Kirish */}
           <div className="mb-5 rounded-xl bg-gray-50 shadow px-4 py-6 flex items-center gap-3 text-gray-900 font-medium cursor-pointer">
             <LogIn size={24} className="stroke-gray-500" />
             {t("login")}
           </div>
 
-          {/* Menu items */}
           <div className="rounded-xl bg-gray-50 shadow px-4 py-5 flex flex-col gap-4">
             <div className="flex items-center gap-3 py-3">
               <Pizza size={20} className="stroke-gray-500" />
@@ -144,7 +141,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   : "text-gray-500"
               }`}
             >
-              O‘zbek 
+              O‘zbek
             </button>
             <button
               onClick={() => handleLangChange("ru")}
@@ -154,7 +151,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   : "text-gray-500"
               }`}
             >
-              Русский 
+              Русский
             </button>
           </div>
         </div>

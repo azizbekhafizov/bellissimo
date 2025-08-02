@@ -60,7 +60,8 @@ export default function Cart() {
                       {item.strMeal}
                     </h2>
                     <p className="text-gray-600 text-sm">
-                      {t("price")}: {(item.price || 20000).toLocaleString()} so‘m
+                      {t("price")}: {(item.price || 20000).toLocaleString()}{" "}
+                      so‘m
                     </p>
 
                     <div className="flex justify-center sm:justify-start items-center gap-3 mt-3">
@@ -85,8 +86,7 @@ export default function Cart() {
                   <div className="text-center sm:text-right">
                     <p className="font-semibold text-base text-gray-800">
                       {(
-                        (quantities[item.idMeal] || 1) *
-                        (item.price || 20000)
+                        (quantities[item.idMeal] || 1) * (item.price || 20000)
                       ).toLocaleString()}{" "}
                       so‘m
                     </p>
@@ -102,7 +102,9 @@ export default function Cart() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-md h-fit sticky top-6">
-              <h3 className="text-xl font-bold mb-4 text-gray-800">{t("totalSummary")}</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-800">
+                {t("totalSummary")}
+              </h3>
               <div className="space-y-2 text-gray-700">
                 <div className="flex justify-between text-base">
                   <span>{t("total")}:</span>

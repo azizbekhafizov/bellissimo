@@ -15,7 +15,7 @@ const regionKeys = [
   "qashqadaryo",
   "surxondaryo",
   "jizzax",
-  "sirdaryo"
+  "sirdaryo",
 ];
 
 export default function LocationSelector() {

@@ -6,7 +6,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
-  const { t } = useTranslation(); // 👈 i18n qo‘shildi
+  const { t } = useTranslation();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

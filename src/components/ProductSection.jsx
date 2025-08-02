@@ -25,7 +25,6 @@ const ProductSection = () => {
     const load = async () => {
       setLoading(true);
 
-      // ⬇️ LocalStorage'dan mavjud ovqatlar
       const storedMeals = JSON.parse(localStorage.getItem("mealsData")) || {};
       const storedCats = Object.keys(storedMeals);
       if (storedCats.length > 0) {
@@ -33,7 +32,6 @@ const ProductSection = () => {
         setMealsByCategory(storedMeals);
       }
 
-      // ⬇️ Yangilab olish
       const cats = await fetchAllMealCategories();
       const validCats = [];
       const mealsData = {};

@@ -5,7 +5,6 @@ import { useCart } from "../contexts/CartContext";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-// Lucide iconlar
 import {
   ArrowLeft,
   ShoppingCart,
@@ -49,7 +48,6 @@ export default function ProductDetails() {
       </button>
 
       <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 flex flex-col md:flex-row gap-8">
-        {/* Chap - Rasm */}
         <div className="w-full md:w-[400px]">
           <img
             src={meal.strMealThumb}
@@ -57,7 +55,6 @@ export default function ProductDetails() {
             className="w-full h-[300px] object-cover rounded-2xl shadow-md"
           />
 
-          {/* Mobil uchun rasm ostidagi info */}
           <div className="md:hidden mt-6 border-t pt-4 text-sm text-gray-700 space-y-2">
             <div className="flex items-center gap-2">
               <Tag size={16} className="text-green-600" />
@@ -81,13 +78,11 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        {/* O‘ng - Info */}
         <div className="flex-1">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
             {meal.strMeal}
           </h1>
 
-          {/* Katta ekran uchun info */}
           <div className="hidden md:flex gap-8 text-sm text-gray-700 mb-4">
             <div className="flex items-center gap-2">
               <Tag size={18} className="text-green-600" />

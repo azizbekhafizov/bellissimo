@@ -1,11 +1,7 @@
 import { Lock, Phone } from "lucide-react";
 import { useState } from "react";
 
-const AuthForm = ({
-  type = "login", // "login" yoki "register"
-  onSubmit,
-  loading = false,
-}) => {
+const AuthForm = ({ type = "login", onSubmit, loading = false }) => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -19,8 +15,10 @@ const AuthForm = ({
   const isRegister = type === "register";
 
   return (
-    <div className=" max-w-[450px] w-full h-[450px] mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-green-400 mb-12
-    ">
+    <div
+      className=" max-w-[450px] w-full h-[450px] mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-green-400 mb-12
+    "
+    >
       <h2 className="text-[36px] font-bold text-center text-green-700 mb-6">
         {isRegister ? "Ro'yxatdan o'tish" : "Kirish"}
       </h2>

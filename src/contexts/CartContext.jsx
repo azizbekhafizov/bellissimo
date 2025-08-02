@@ -17,12 +17,10 @@ export const CartProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
   const [cartVisible, setCartVisible] = useState(false);
 
-  // 🔁 LocalStorage ga yozish
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // ✅ Mahsulotni savatchaga qo‘shish
   const addToCart = (item) => {
     const exists = cart.find((i) => i.idMeal === item.idMeal);
     if (!exists) {

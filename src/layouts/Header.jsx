@@ -11,7 +11,7 @@ import halal from "../../public/assets/images/halal.webp";
 import uzb from "../../public/assets/images/uzb.svg";
 import ru from "../../public/assets/images/rus.svg";
 import phone from "../../public/assets/images/phone.svg";
-import logo from '../../public/assets/images/logo_new.svg'
+import logo from "../../public/assets/images/logo_new.svg";
 const defaultAvatar = "/assets/images/uset.svg";
 
 import LocationSelector from "../components/LocationSelector";
@@ -66,7 +66,6 @@ const Header = () => {
       )}
 
       <header className="w-full mx-auto md:w-[90%] lg:w-[80%] 2xl:w-[75%] bg-white border-b border-[#f4f4f4] font-sans relative z-30">
-        {/* Top Bar */}
         <div className="hidden sm:flex justify-between items-center px-6 pt-4 text-[18px] font-medium">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 text-[#006f4c] font-extrabold">
@@ -81,7 +80,6 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Language Switcher */}
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -102,24 +100,24 @@ const Header = () => {
                   className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full"
                 >
                   <img src={uzb} className="w-[20px] h-[20px]" alt="Uzbek" />
-                  O'zbek 
+                  O'zbek
                 </button>
                 <button
                   onClick={() => handleLanguageChange("ru")}
                   className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full"
                 >
                   <img src={ru} className="w-[20px] h-[20px]" alt="Russian" />
-                  Русский 
+                  Русский
                 </button>
               </div>
             )}
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="flex items-center justify-between sm:px-6 sm:pt-8">
-            <a className="decoration-0" href="/"><img className="hidden sm:block" src={logo} alt="" /></a>
-          {/* Location & Delivery Info */}
+          <a className="decoration-0" href="/">
+            <img className="hidden sm:block" src={logo} alt="" />
+          </a>
           <div className="hidden sm:flex items-center gap-6">
             <LocationSelector />
             <div className="hidden lg:flex items-center">
@@ -133,7 +131,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Logo, Bonus, User */}
           <div className="w-full sm:w-max flex items-center justify-between gap-6">
             <img
               src={halal}
@@ -165,7 +162,7 @@ const Header = () => {
                     alt="user"
                     className="w-[36px] h-[36px] rounded-full border border-green-600 object-cover"
                   />
-                  <span className="text-white sm:text-black sm:text-[#007C5B] font-semibold text-[16px]">
+                  <span className="text-white  sm:text-[#007C5B] font-semibold text-[16px]">
                     {user.name}
                   </span>
                 </div>
